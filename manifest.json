@@ -1,0 +1,15 @@
+{
+    "dir": "ltr",
+    "lang": "en",
+    "name": "PWA Starter Template",
+    "scope": "/",
+    "display": "standalone",
+    "start_url": "/",
+    "short_name": "PWA Starter Template",
+    "theme_color": "#000000",
+    "description": "A template used to begin work on a PWA (Progressive Web App)",
+    "orientation": "Portrait",
+    "background_color": "#000000",
+    "related_applications": "",
+    "prefer_related_applications": false
+}
