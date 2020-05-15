@@ -9,7 +9,7 @@ self.addEventListener("message", (event) => {
 });
 
 const networkFirstPaths = [
-    "**.html"
+    "(.*)\.html"
 ];
 
 networkFirstPaths.forEach((path) => {
