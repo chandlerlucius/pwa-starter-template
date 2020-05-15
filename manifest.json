@@ -10,7 +10,7 @@
     "description": "A template used to begin work on a PWA (Progressive Web App)",
     "orientation": "Portrait",
     "background_color": "#000000",
-    "related_applications": "[]",
+    "related_applications": [],
     "prefer_related_applications": false,
     "icons": [
         {
