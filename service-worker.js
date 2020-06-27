@@ -8,11 +8,20 @@ workbox.routing.registerRoute(
 );
 
 const shareTargetHandler = async ({event}) => {
-  const formData = await event.request.formData();
-  const mediaFiles = formData.getAll('media');
-  for (const mediaFile of mediaFiles) {
-    console.log(mediaFile.name + " " + mediaFile.size + " " + mediaFile.type);
-  }
+  Notification.requestPermission(function(result) {
+    if (result === 'granted') {
+      navigator.serviceWorker.ready.then(function(registration) {
+        const formData = await event.request.formData();
+        const mediaFiles = formData.getAll('media');
+        for (const mediaFile of mediaFiles) {
+          registration.showNotification('Vibration Sample', {
+            body: mediaFile.name + " " + mediaFile.size + " " + mediaFile.type,
+            tag: 'vibration-sample'
+          });
+        }
+      });
+    }
+  });
 };
 
 workbox.routing.registerRoute(
