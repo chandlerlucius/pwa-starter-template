@@ -32,11 +32,12 @@
           .catch(err => {
             console.log('Service worker registration failed: ', err);
           });
-      });
-      navigator.serviceWorker.addEventListener('message', event => {
-        const div = document.createElement("div");
-        div.innerHTML = event.data.msg;
-        document.body.appendChild(div);
+
+        navigator.serviceWorker.addEventListener('message', event => {
+          const img = document.createElement("img");
+          img.src = URL.createObjectURL(event.data.file);
+          document.body.appendChild(div);
+        });
       });
     }
   </script>

@@ -1,22 +1,25 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
 
-self.skipWaiting();
+self.addEventListener("fetch", function (event) {
+  if (event.request.url.indexOf('/share/image') > -1) {
+    event.respondWith((async () => {
+      const data = await event.request.formData();
+      const client = await self.clients.get(event.resultingClientId || event.clientId);
+      const files = data.getAll('files');
 
-workbox.routing.registerRoute(
-  new RegExp('/*'),
-  new workbox.strategies.NetworkFirst()
-);
+      console.log('files', files);
+      client.postMessage({
+        files,
+        action: 'load'
+      });
+    })());
+  }
+});
 
-const shareTargetHandler = async ({event}) => {
-  const data = await event.request.formData();
-  const client = await self.clients.get(event.resultingClientId || event.clientId);
-  const files = data.getAll('files');
+oninstall = () => {
+  skipWaiting();
+};
 
-  client.postMessage({ msg: "Hey I just got a fetch from you!"});
-}
-
-workbox.routing.registerRoute(
-  '/share/image',
-  shareTargetHandler,
-  'POST'
-);
+onactivate = () => {
+  clients.claim();
+};
