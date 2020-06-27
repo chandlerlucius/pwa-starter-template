@@ -25,13 +25,12 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
-        navigator.serviceWorker.register('service-worker.js')
-          .then(reg => {
-            console.log('Service worker registered!', reg);
-          })
-          .catch(err => {
-            console.log('Service worker registration failed: ', err);
-          });
+        navigator.serviceWorker.addEventListener('message', event => {
+          const img = document.createElement("div");
+          img.innerHTML = event.data.msg;
+          // img.src = URL.createObjectURL(event.data.file);
+          document.body.appendChild(img);
+        });
       });
     }
   </script>
