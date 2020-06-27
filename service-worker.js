@@ -7,22 +7,16 @@ workbox.routing.registerRoute(
   new workbox.strategies.NetworkFirst()
 );
 
-onfetch = async (event) => {
-  if (event.request.method !== 'POST') return;
+const shareTargetHandler = async ({event}) => {
+  const data = await event.request.formData();
+  const client = await self.clients.get(event.resultingClientId || event.clientId);
+  const files = data.getAll('files');
 
-  /* This is to fix the issue Jake found */
-  event.respondWith(Response.redirect('/share/image/'));
+  client.postMessage({ msg: "Hey I just got a fetch from you!"});
+}
 
-  event.waitUntil(async function () {
-    const data = await event.request.formData();
-    const client = await self.clients.get(event.resultingClientId || event.clientId);
-    // Get the data from the named element 'file'
-    const file = data.get('file');
-
-    console.log('file', file);
-    client.postMessage({
-      file,
-      action: 'load-image'
-    });
-  }());
-};
+workbox.routing.registerRoute(
+  '/share/image',
+  shareTargetHandler,
+  'POST'
+);
