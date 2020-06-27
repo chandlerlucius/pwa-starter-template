@@ -15,7 +15,7 @@ const shareTargetHandler = async ({event}) => {
   }
 };
 
-workbox.registerRoute(
+workbox.routing.registerRoute(
   '/_share-target',
   shareTargetHandler,
   'POST'
