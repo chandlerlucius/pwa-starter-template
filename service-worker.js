@@ -10,19 +10,11 @@ workbox.routing.registerRoute(
 const shareTargetHandler = async ({
   event
 }) => {
+  const client = await self.clients.get(event.resultingClientId || event.clientId);
   const formData = await event.request.formData();
   const mediaFiles = formData.getAll('media');
   for (const mediaFile of mediaFiles) {
-    Notification.requestPermission(function (result) {
-      if (result === 'granted') {
-        navigator.serviceWorker.ready.then(function (registration) {
-          registration.showNotification('Vibration Sample', {
-            body: mediaFile.name + " " + mediaFile.size + " " + mediaFile.type,
-            tag: 'vibration-sample'
-          });
-        });
-      }
-    });
+    client.postMessage({mediaFile, action: 'load-image'});
   }
 };
 

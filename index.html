@@ -33,6 +33,15 @@
             console.log('Service worker registration failed: ', err);
           });
       });
+      navigator.serviceWorker.onmessage = (event) => {
+        const imageBlob = event.data.file;
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(imageBlob);
+        // img.onload = function() {
+        //   URL.revokeObjectURL(this.src);
+        // }
+        document.body.appendChild(img);
+      }
     }
   </script>
 </head>
