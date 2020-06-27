@@ -26,9 +26,3 @@ onfetch = async (event) => {
     });
   }());
 };
-
-workbox.routing.registerRoute(
-  '/_share-target',
-  shareTargetHandler,
-  'POST'
-);
