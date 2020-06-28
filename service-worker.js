@@ -4,14 +4,17 @@ self.addEventListener("fetch", function (event) {
   if (event.request.method === 'POST') {
     event.respondWith((async () => {
       // const data = await event.request.formData();
-      self.clients.claim();
-      const client = await self.clients.get(event.resultingClientId || event.clientId);
+      // const client = await self.clients.get(event.resultingClientId || event.clientId);
       // const files = data.getAll('files');
 
-      // console.log('files', files);
-      client.postMessage({
-        msg: "hello",
-      });
+      self.clients.matchAll({
+        includeUncontrolled: true,
+        type: 'window'
+      }).then(clients => {
+        clients.forEach(client => client.postMessage({
+          msg: 'Hello from SW'
+        }));
+      })
     })());
   }
 });
