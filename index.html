@@ -32,6 +32,13 @@
           .catch(err => {
             console.log('Service worker registration failed: ', err);
           });
+
+        navigator.serviceWorker.addEventListener('message', event => {
+          const img = document.createElement("div");
+          img.innerHTML = event.data.msg;
+          // img.src = URL.createObjectURL(event.data.file);
+          document.body.appendChild(img);
+        });
       });
     }
   </script>

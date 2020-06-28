@@ -2,9 +2,9 @@
   "dir": "ltr",
   "lang": "en",
   "name": "PWA Starter Template",
-  "scope": ".",
+  "scope": "/pwa-starter-template/",
   "display": "standalone",
-  "start_url": "./",
+  "start_url": "/pwa-starter-template/",
   "short_name": "PWA Starter Template",
   "theme_color": "#01579B",
   "description": "A template used to begin work on a PWA (Progressive Web App)",
@@ -23,7 +23,7 @@
     }
   ],
   "share_target": {
-    "action": "/pwa-starter-template/share/image",
+    "action": "/pwa-starter-template/",
     "method": "POST",
     "enctype": "multipart/form-data",
     "params": {
