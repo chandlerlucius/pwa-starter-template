@@ -7,14 +7,10 @@ self.addEventListener("fetch", function (event) {
       // const client = await self.clients.get(event.resultingClientId || event.clientId);
       // const files = data.getAll('files');
 
-      self.clients.matchAll({
-        includeUncontrolled: true,
-        type: 'window'
-      }).then(clients => {
-        clients.forEach(client => client.postMessage({
-          msg: 'Hello from SW'
-        }));
-      })
+      const channel = new BroadcastChannel('sw-messages');
+      channel.postMessage({
+        msg: 'Hello from SW'
+      });
     })());
   }
 });

@@ -32,8 +32,9 @@
           .catch(err => {
             console.log('Service worker registration failed: ', err);
           });
-
-        navigator.serviceWorker.addEventListener('message', event => {
+          
+        const channel = new BroadcastChannel('sw-messages');
+        channel.addEventListener('message', event => {
           const img = document.createElement("div");
           img.innerHTML = event.data.msg;
           // img.src = URL.createObjectURL(event.data.file);
