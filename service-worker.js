@@ -1,24 +1,8 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
 
-self.addEventListener("fetch", function (event) {
-  if (event.request.method === 'POST') {
-    event.respondWith((async () => {
-      // const data = await event.request.formData();
-      // const client = await self.clients.get(event.resultingClientId || event.clientId);
-      // const files = data.getAll('files');
+self.skipWaiting();
 
-      const channel = new BroadcastChannel('sw-messages');
-      channel.postMessage({
-        msg: 'Hello from SW'
-      });
-    })());
-  }
-});
-
-oninstall = () => {
-  skipWaiting();
-};
-
-onactivate = () => {
-  clients.claim();
-};
+workbox.routing.registerRoute(
+  new RegExp('/*'),
+  new workbox.strategies.NetworkFirst()
+);
