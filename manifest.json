@@ -4,7 +4,7 @@
     "name": "PWA Starter Template",
     "scope": ".",
     "display": "standalone",
-    "start_url": "./",
+    "start_url": "./index.html",
     "short_name": "PWA Starter Template",
     "theme_color": "#01579B",
     "description": "A template used to begin work on a PWA (Progressive Web App)",
